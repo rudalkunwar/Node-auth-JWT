@@ -1,0 +1,44 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Shop Login</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-sans">
+<%- include('./partials/header.ejs')-%>
+<div class="bg-gray-100 flex items-center justify-center h-screen" >
+  <div class="bg-white p-8 rounded-lg shadow-md w-96">
+    <h2 class="text-3xl font-bold mb-6">Coffee Shop Register</h2>
+
+    <form>
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+        <input type="text" id="username" name="username" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+        <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <div class="mb-6">
+        <label for="cpassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+        <input type="password" id="cpassword" name="cpassword" class="mt-1 p-2 w-full border rounded-md">
+      </div>
+
+      <button type="submit" class="w-full bg-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600">
+        Register
+      </button>
+    </form>
+  </div>
+</div>
+  
+
+</body>
+
+</html>

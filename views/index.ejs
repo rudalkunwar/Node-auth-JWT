@@ -1,15 +1,15 @@
 <%- include('partials/header'); -%>
+<body class="font-sans">
 
-<header>
-  <div class="smoothie">
-    <img src="/smoothie.png" alt="">
-  </div>
-  <div class="headings">
-    <h2>Smoothie Recipes</h2>
-    <h3>By Ninjas For Ninjas</h3>
-    <a href="/smoothies" class="btn">View Recipes</a>
-  </div>
-</header>
+  <section class="bg-cover bg-center h-screen flex items-center" style="background-image: url('/bg.jpg');">
+    <div class="text-cyan-400 text-center mx-auto">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Your Coffee Haven</h1>
+      <p class="text-lg md:text-xl mb-8">Discover the perfect brew crafted with passion.</p>
+      <a href="#contact-form" class="bg-yellow-500 text-white px-6 py-3 rounded-full hover:bg-yellow-600">Contact Us</a>
+    </div>
+  </section>
+  <%- include('partials/footer'); -%>
 
+</body>
 
-<%- include('partials/footer'); -%>
+</html>
