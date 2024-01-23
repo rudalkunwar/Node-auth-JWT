@@ -14,12 +14,7 @@
       <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-3xl font-bold mb-6">Coffee Shop Register</h2>
 
-        <form
-          name="form"
-          method="post"
-          action="/register"
-          onsubmit="return validateForm()"
-        >
+        <form name="form" method="post">
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-600"
               >Email</label
@@ -70,15 +65,21 @@
       </div>
     </div>
     <script>
-      function validateForm(msg) {
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-        const cpass = document.getElementById("cpassword").value;
-        if (pass !== cpass) {
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        formdata = new FormData(event.target);
+        const email = formdata.get("email");
+        const password = formdata.get("password");
+        const cpassword = formdata.get("cpassword");
+        console.log(email,password);
+        if (password !== cpassword) {
           showErrorNotification("Password doesnot match");
           return false;
         }
-      }
+      });
+      
       function showErrorNotification(errorMessage) {
         Swal.fire({
           title: "Error Creating a user",

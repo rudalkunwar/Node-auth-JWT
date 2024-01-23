@@ -16,7 +16,7 @@ mongoose
     console.log("Database Connection Established");
     app.listen(3000);
   })
-  .then((error) => console.log(error));
+  .catch((error) => console.log("Unable to Connect to Database"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
