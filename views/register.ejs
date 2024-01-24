@@ -14,7 +14,7 @@
       <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-3xl font-bold mb-6">Coffee Shop Register</h2>
         <form name="form" method="post">
-        <h2 class="text-red-500" id="error"></h2>
+          <h2 class="text-red-500" id="error"></h2>
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-600"
               >Email</label
@@ -65,7 +65,7 @@
       </div>
     </div>
     <script>
-      const error = document.getElementById('error');
+      const error = document.getElementById("error");
       const form = document.querySelector("form");
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -77,30 +77,32 @@
           showErrorNotification("Password doesnot match");
           return false;
         }
-       try{
-        // const res = await
-         fetch('/register',{
-          method:"post",
-          body:JSON.stringify({email,password}),
-          headers:{'Content-Type':'application/json'}
-        }).then(response=>response.json())
-        .then(data=>{
-          console.log(data.email);
-          if(data.email!='')
-          {
-            error.innerText = data.email;
-          }else{
-            error.innerText = data.password;
-          }
-        })
-        .catch((err)=>{
-          error.innerText = err;
-        })
-       }catch(e){
-        console.log("Some error Try again"+e);
-       }
+        try {
+          // const res = await
+          fetch("/register", {
+            method: "post",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.email);
+              if (data && data.email && data.password) {
+                if (data.email != "") {
+                  error.innerText = data.email;
+                } else {
+                  error.innerText = data.password;
+                }
+              }
+            })
+            .catch((err) => {
+              error.innerText = err;
+            });
+        } catch (e) {
+          console.log("Some error Try again" + e);
+        }
       });
-      
+
       function showErrorNotification(errorMessage) {
         Swal.fire({
           title: "Error Creating a user",
