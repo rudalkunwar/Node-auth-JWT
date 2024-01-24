@@ -1,6 +1,7 @@
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const { default: mongoose } = require("mongoose");
+const cookieParser = require('cookie-parser');
 const path = require("path");
 const app = express();
 
@@ -20,6 +21,7 @@ mongoose
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 //requested routes ------->
 app.get("/", (req, res) => {
@@ -28,5 +30,13 @@ app.get("/", (req, res) => {
 app.get("/specials", (req, res) => {
   res.render("smoothie");
 });
+app.get('/kun',(req,res)=>{
+  res.cookie('Username','Rudal',{maxAge:1000*60});
+  res.json("Collies set")
+})
 
+app.get('/getkun',(req,res)=>{
+  const cook = req.cookies;
+  res.json("cookie"+cook);
+})
 app.use(authRoutes);

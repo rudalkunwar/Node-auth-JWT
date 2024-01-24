@@ -1,5 +1,4 @@
 const User = require("../models/user");
-
 const errorHandeler = (err) => {
   const errors = { email: "", password: "" };
   //duplicate error 
@@ -25,10 +24,10 @@ module.exports.user_register = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
-    res.status(201).send("User created Sucessfully");
+    res.status(201).json("User created Sucessfully");
   } catch (err) {
     const errors = errorHandeler(err);
-    res.render('register');
+    res.send(errors);
   }
 };
 module.exports.user_login = (req, res) => {
