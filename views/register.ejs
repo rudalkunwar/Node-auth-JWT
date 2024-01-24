@@ -87,12 +87,12 @@
             .then((response) => response.json())
             .then((data) => {
               console.log(data.email);
-              if (data && data.email && data.password) {
-                if (data.email != "") {
-                  error.innerText = data.email;
-                } else {
-                  error.innerText = data.password;
-                }
+              if (data && data.email != "") {
+                error.innerText = data.email;
+              } else if (data && data.password) {
+                error.innerText = data.password;
+              } else {
+                error.innerText = "";
               }
             })
             .catch((err) => {
