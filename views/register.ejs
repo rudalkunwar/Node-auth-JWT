@@ -74,7 +74,7 @@
         const password = formdata.get("password");
         const cpassword = formdata.get("cpassword");
         if (password !== cpassword) {
-          showErrorNotification("Password doesnot match");
+          error.innerText = "Password doesnot match";
           return false;
         }
         try {
@@ -102,15 +102,6 @@
           console.log("Some error Try again" + e);
         }
       });
-
-      function showErrorNotification(errorMessage) {
-        Swal.fire({
-          title: "Error Creating a user",
-          text: errorMessage,
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      }
     </script>
   </body>
 </html>
