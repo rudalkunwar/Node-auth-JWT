@@ -30,13 +30,9 @@ app.get("/", (req, res) => {
 app.get("/specials", (req, res) => {
   res.render("smoothie");
 });
-app.get('/kun',(req,res)=>{
-  res.cookie('Username','Rudal',{maxAge:1000*60});
-  res.json("Collies set")
-})
-
 app.get('/getkun',(req,res)=>{
   const cook = req.cookies;
   res.json("cookie"+cook);
+  console.log(cook);
 })
 app.use(authRoutes);
