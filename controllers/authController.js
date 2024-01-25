@@ -17,23 +17,22 @@ const errorHandeler = (err) => {
 };
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({id}, "SecrtRudalKeyYes", {expiresIn: maxAge});
+  return jwt.sign({ id }, "SecrtRudalKeyYes", { expiresIn: maxAge });
 };
 
 module.exports.register_page = (req, res) => {
   res.render("register");
 };
 module.exports.login_page = (req, res) => {
-  res.render("login",);
+  res.render("login");
 };
 module.exports.user_register = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
     const token = createToken(user._id);
-    console.log(token);
     res.cookie("jwttokencookie", token, { maxAge: maxAge * 1000 });
-    res.status(201).json({message:"User created Sucessfully"});
+    res.status(201).json({ message: "User created Sucessfully" });
   } catch (err) {
     const errors = errorHandeler(err);
     res.send(errors);

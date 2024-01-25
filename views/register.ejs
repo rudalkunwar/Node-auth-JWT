@@ -66,6 +66,7 @@
     </div>
     <script>
       const error = document.getElementById("error");
+      const sucess = document.getElementById("sucess");
       const form = document.querySelector("form");
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -91,6 +92,7 @@
               } else if (data.password) {
                 error.innerText = data.password;
               } else if (data.message) {
+                error.className = "text-green-500";
                 error.innerText = data.message;
               } else {
                 error.innerText = "";
