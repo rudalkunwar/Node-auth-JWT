@@ -17,9 +17,7 @@ const errorHandeler = (err) => {
 };
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign(id, "SecrtRudalKeyYes", {
-    expiresIn: maxAge,
-  });
+  return jwt.sign(id, "SecrtRudalKeyYes", {expiresIn: maxAge});
 };
 
 module.exports.register_page = (req, res) => {
@@ -32,7 +30,9 @@ module.exports.user_register = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
-    const token = createToken(user._id);
+    console.log(user._id);
+    const token = createToken(user._id.toString());
+    console.log(token);
     res.cookie("jwttokencookie", token, { maxAge: maxAge * 1000 });
     res.status(201).json("User created Sucessfully");
   } catch (err) {
