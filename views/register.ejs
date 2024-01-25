@@ -78,6 +78,7 @@
       const email_error = document.getElementById("email-error");
       const sucess = document.getElementById("sucess");
       const form = document.querySelector("form");
+      var emailRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         formdata = new FormData(event.target);
@@ -85,11 +86,16 @@
         const password = formdata.get("password");
         const cpassword = formdata.get("cpassword");
         if (password !== cpassword) {
-          error.innerText = "Password doesnot match";
-          return false;
+          pass_error.innerText = "Password doesnot match";
+
+          return;
+        }
+        if (!emailRegex.test(email)) {
+          email_error.innerText = "Enter valid email address";
+          pass_error.innerText = "";
+          return;
         }
         try {
-          // const res = await
           fetch("/register", {
             method: "post",
             body: JSON.stringify({ email, password }),
@@ -103,12 +109,8 @@
               } else if (data.password) {
                 pass_error.innerText = data.password;
                 email_error.innerText = "";
-              } else if (data.message) {
-                sucess.innerText = data.message;
-                email_error.innerText = "";
-                pass_error.innerText = "";
-
-                form.reset();
+              } else if (data.user) {
+                window.location.href = "/specials";
               } else {
                 error.innerText = "";
                 form.reset();
