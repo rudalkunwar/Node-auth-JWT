@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffee Shop Login</title>
+    <title>Coffee Shop Registration</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
 
@@ -20,6 +20,7 @@
               >Email</label
             >
             <input
+              required
               type="email"
               id="email"
               name="email"
@@ -34,6 +35,7 @@
               >Password</label
             >
             <input
+              required
               type="password"
               id="password"
               name="password"
@@ -48,6 +50,7 @@
               >Confirm Password</label
             >
             <input
+              required
               type="password"
               id="cpassword"
               name="cpassword"
@@ -62,6 +65,10 @@
             Register
           </button>
         </form>
+        <div class="flex pt-2">
+          <h2 class="mr-1">Already have account?</h2>
+          <a href="/login" class="hover:text-blue-500">Sign In</a>
+        </div>
       </div>
     </div>
     <script>
@@ -96,8 +103,8 @@
                 error.innerText = data.message;
               } else {
                 error.innerText = "";
+                form.reset();
               }
-              form.reset();
             })
             .catch((err) => {
               console.log(err);

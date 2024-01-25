@@ -3,6 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const errorHandeler = (err) => {
   const errors = { email: "", password: "" };
+  if (err.message.includes("Incorrect Password")) {
+    errors["password"] = "Incorrect Password";
+  }if(err.message.includes("User doesnot exists")){
+    errors["email"] = "User doesnot exists";
+  }
   //duplicate error
   if (err.code == 11000) {
     errors["email"] = "Email already registered";
@@ -31,13 +36,28 @@ module.exports.user_register = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
     const token = createToken(user._id);
-    res.cookie("jwttokencookie", token, { maxAge: maxAge * 1000 });
-    res.status(201).json({ message: "User created Sucessfully" });
+    res.cookie("jwttokencookie", token, {
+      httpOnly: true,
+      maxAge: maxAge * 1000,
+    });
+    res.status(201).json({user:user._id});
   } catch (err) {
     const errors = errorHandeler(err);
     res.send(errors);
   }
 };
-module.exports.user_login = (req, res) => {
+module.exports.user_login = async (req, res) => {
   const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwttokencookie", token, {
+      httpOnly: true,
+      maxAge: maxAge * 1000,
+    });
+    res.status(201).json({user:user._id});
+  } catch (err) {
+    const errors = errorHandeler(err);
+    res.send(errors);
+  }
 };

@@ -30,6 +30,9 @@ app.get("/", (req, res) => {
 app.get("/specials", (req, res) => {
   res.render("smoothie");
 });
+app.get("/admin", (req, res) => {
+  res.render("dashboard");
+});
 app.get('/getkun',(req,res)=>{
   const cook = req.cookies;
   res.json("cookie"+cook);
