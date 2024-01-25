@@ -14,7 +14,7 @@
       <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-3xl font-bold mb-6">Coffee Shop Register</h2>
         <form name="form" method="post">
-          <h2 class="text-red-500" id="error"></h2>
+          <h2 class="bg-green-500" id="sucess"></h2>
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-600"
               >Email</label
@@ -26,6 +26,7 @@
               class="mt-1 p-2 w-full border rounded-md"
             />
           </div>
+          <h2 class="text-red-500" id="email-error"></h2>
 
           <div class="mb-6">
             <label
@@ -39,6 +40,7 @@
               name="password"
               class="mt-1 p-2 w-full border rounded-md"
             />
+            <h2 class="text-red-500" id="pass-error"></h2>
           </div>
 
           <div class="mb-6">
@@ -65,7 +67,8 @@
       </div>
     </div>
     <script>
-      const error = document.getElementById("error");
+      const pass_error = document.getElementById("pass-error");
+      const email_error = document.getElementById("email-error");
       const sucess = document.getElementById("sucess");
       const form = document.querySelector("form");
       form.addEventListener("submit", async (event) => {
@@ -88,16 +91,20 @@
             .then((response) => response.json())
             .then((data) => {
               if (data.email) {
-                error.innerText = data.email;
+                email_error.innerText = data.email;
+                pass_error.innerText = "";
               } else if (data.password) {
-                error.innerText = data.password;
+                pass_error.innerText = data.password;
+                email_error.innerText = "";
               } else if (data.message) {
-                error.className = "text-green-500";
-                error.innerText = data.message;
+                sucess.innerText = data.message;
+                email_error.innerText = "";
+                pass_error.innerText = "";
+
+                form.reset();
               } else {
                 error.innerText = "";
               }
-              form.reset();
             })
             .catch((err) => {
               console.log(err);
