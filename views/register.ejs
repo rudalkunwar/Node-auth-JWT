@@ -86,17 +86,19 @@
           })
             .then((response) => response.json())
             .then((data) => {
-              console.log(data.email);
-              if (data && data.email != "") {
+              if (data.email) {
                 error.innerText = data.email;
-              } else if (data && data.password) {
+              } else if (data.password) {
                 error.innerText = data.password;
+              } else if (data.message) {
+                error.innerText = data.message;
               } else {
                 error.innerText = "";
               }
               form.reset();
             })
             .catch((err) => {
+              console.log(err);
               error.innerText = err;
             });
         } catch (e) {
